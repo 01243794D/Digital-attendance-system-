@@ -1,4 +1,4 @@
-#include <iostream>
+ #include <iostream>
 #include <vector>
 #include <string>
 
@@ -85,6 +85,72 @@ int main() {
                 break;
             case 2:
                 cout << "View Sessions selected.\n";
+                break;
+            case 0:
+                cout << "Exiting program...\n";
+                break;
+            default:
+                cout << "Invalid option!\n";
+        }
+
+    } while(choice != 0);
+
+    return 0;
+}
+
+vector<AttendanceSession> sessions;
+
+void createSession() {
+    string code, date, time;
+    int duration;
+
+    cout << "\nEnter Course Code: ";
+    cin >> code;
+
+    cout << "Enter Date (YYYY-MM-DD): ";
+    cin >> date;
+
+    cout << "Enter Start Time (HH:MM): ";
+    cin >> time;
+
+    cout << "Enter Duration (minutes): ";
+    cin >> duration;
+
+    AttendanceSession newSession(code, date, time, duration);
+    sessions.push_back(newSession);
+
+    cout << "\nSession created successfully!\n";
+}
+
+void viewSessions() {
+    if (sessions.empty()) {
+        cout << "\nNo sessions available.\n";
+        return;
+    }
+
+    for (int i = 0; i < sessions.size(); i++) {
+        cout << "\nSession " << i + 1 << endl;
+        sessions[i].displaySessionInfo();
+    }
+}
+
+int main() {
+    int choice;
+
+    do {
+        cout << "\n==== DIGITAL ATTENDANCE SYSTEM ====\n";
+        cout << "1. Create Lecture Session\n";
+        cout << "2. View Sessions\n";
+        cout << "0. Exit\n";
+        cout << "Select Option: ";
+        cin >> choice;
+
+        switch(choice) {
+            case 1:
+                createSession();
+                break;
+            case 2:
+                viewSessions();
                 break;
             case 0:
                 cout << "Exiting program...\n";
